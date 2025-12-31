@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #1a1a40, #000);
+  color: white;
+}
+
+/* Slides */
+.slide {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  padding: 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.slide.active {
+  display: flex;
+}
+
+/* Buttons */
+button {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(45deg, #ff4d6d, #ff8fab);
+  color: white;
+}
+
+/* Titles */
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  max-width: 700px;
+}
+
+/* Golden Ticket */
+.ticket {
+  background: linear-gradient(135deg, gold, #ffcc00);
+  color: #000;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px gold;
+  max-width: 600px;
+  font-weight: bold;
+}
+
+/* Quote Grid */
+.quote-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.quote {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  font-size: 1rem;
+}
+
+/* Heart */
+.heart {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  background: red;
+  transform: rotate(45deg);
+  animation: float 2s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -7px;
+  left: 0;
+}
+
+.heart::after {
+  left: -7px;
+  top: 0;
+}
+
+@keyframes float {
+  0% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) rotate(45deg) scale(1.5);
+  }
+}
+
+/* Mobile fix */
+@media(max-width: 600px) {
+  h1 { font-size: 2rem; }
+  p { font-size: 1rem; }
+  .quote-box {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Slide 1 -->
+<div class="slide active">
+  <h1>Hey You ❤️</h1>
+  <p>This is something small but made with a lot of feelings.</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+  <h1>Hold the Heart 💖</h1>
+  <p>Tap or move your finger… something cute will follow you.</p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+  <h1>Golden Ticket ✨</h1>
+  <div class="ticket">
+    This ticket gives you unlimited smiles, warmth, and a place
+    where you’re always appreciated.
+  </div>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+  <h1>Little Things I Like 🌙</h1>
+  <div class="quote-box">
+    <div class="quote">Your smile hits differently.</div>
+    <div class="quote">You make silence feel peaceful.</div>
+    <div class="quote">Talking to you never feels forced.</div>
+    <div class="quote">You’re effortlessly special.</div>
+  </div>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+  <h1>Most Beautiful Girl I Ever Met 💫</h1>
+  <p>
+    Not just by looks, but by the way you exist,
+    think, and make moments feel lighter.
+  </p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+  <h1>Happy New Year 🎉</h1>
+  <p>
+    I hope this year brings you peace, smiles,
+    and everything you quietly deserve.
+  </p>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll(".slide");
+
+function nextSlide() {
+  slides[current].classList.remove("active");
+  current++;
+  if (current < slides.length) {
+    slides[current].classList.add("active");
+  }
+}
+
+/* ❤️ HEART EFFECT – MOBILE + DESKTOP */
+function createHeart(x, y) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = x + "px";
+  heart.style.top = y + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 2000);
+}
+
+document.addEventListener("mousemove", e => {
+  createHeart(e.clientX, e.clientY);
+});
+
+document.addEventListener("touchstart", e => {
+  const t = e.touches[0];
+  createHeart(t.clientX, t.clientY);
+});
+
+document.addEventListener("touchmove", e => {
+  const t = e.touches[0];
+  createHeart(t.clientX, t.clientY);
+});
+</script>
+
+</body>
+</html>
